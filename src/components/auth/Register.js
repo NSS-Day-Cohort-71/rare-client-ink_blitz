@@ -11,7 +11,7 @@ export const Register = ({ setToken }) => {
   const bio = useRef();
   const password = useRef();
   const verifyPassword = useRef();
-  // const passwordDialog = useRef()
+  const passwordDialog = useRef();
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -33,14 +33,17 @@ export const Register = ({ setToken }) => {
           navigate('/');
         }
       });
+    } else {
+      passwordDialog.current.showModal();
     }
-    // } else {
-    //   passwordDialog.current.showModal()
-    // }
   };
 
   return (
     <section className="columns is-centered">
+      <dialog ref={passwordDialog}>
+        <p>Passwords do not match. Please try again.</p>
+        <button onClick={() => passwordDialog.current.close()}>Close</button>
+      </dialog>
       <form className="column is-two-thirds" onSubmit={handleRegister}>
         <h1 className="title">Rare Publishing</h1>
         <p className="subtitle">Create an account</p>
