@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getPost } from '../../managers/PostManager';
+import { useNavigate, useParams } from 'react-router-dom';
+import { editPost, getPost } from '../../managers/PostManager';
 
 export const EditPost = ({ token }) => {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({
+    title: '',
+    image_url: '',
+    content: '',
+  });
   const { postId } = useParams();
   const title = useRef();
-  const imageUrl = useRef();
+  const image_url = useRef();
   const content = useRef();
+  const navigate = useNavigate();
 
   const getAndSetPost = async () => {
     const postObject = await getPost(postId);
@@ -39,13 +44,10 @@ export const EditPost = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const editedPostObject = {
-      user_id: token,
-      title: title.current.value,
-      image_url: imageUrl.current.value,
-      content: content.current.value,
-      category_id: 2,
-    };
+    const editedPostObject = { id: postId, ...post };
+
+    await editPost(editedPostObject);
+    navigate(`/postDetails/${postId}`);
   };
 
   return (
@@ -74,7 +76,7 @@ export const EditPost = ({ token }) => {
               className="input"
               type="text"
               value={post.image_url}
-              ref={imageUrl}
+              ref={image_url}
               onChange={handleImgUrlChange}
             />
           </div>
