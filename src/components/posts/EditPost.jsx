@@ -24,6 +24,18 @@ export const EditPost = ({ token }) => {
     setPost(copy);
   };
 
+  const handleImgUrlChange = (e) => {
+    const copy = { ...post };
+    copy.image_url = e.target.value;
+    setPost(copy);
+  };
+
+  const handleContentChange = (e) => {
+    const copy = { ...post };
+    copy.content = e.target.value;
+    setPost(copy);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,6 +75,7 @@ export const EditPost = ({ token }) => {
               type="text"
               value={post.image_url}
               ref={imageUrl}
+              onChange={handleImgUrlChange}
             />
           </div>
         </div>
@@ -77,6 +90,7 @@ export const EditPost = ({ token }) => {
               className="textarea"
               ref={content}
               value={post.content}
+              onChange={handleContentChange}
             />
           </div>
         </div>
