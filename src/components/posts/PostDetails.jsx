@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPost } from "../../managers/PostManager";
-import { HumanDate } from "../utils/HumanDate";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPost } from '../../managers/PostManager';
+import { HumanDate } from '../utils/HumanDate';
 
 /* 
 - Define post details function
