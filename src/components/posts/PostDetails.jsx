@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
 
@@ -15,6 +15,7 @@ import { HumanDate } from '../utils/HumanDate';
 export const PostDetails = () => {
   const [post, setPost] = useState({});
   const { postId } = useParams();
+  const navigate = useNavigate();
 
   const getAndSetPost = async () => {
     const postObject = await getPost(postId);
@@ -28,6 +29,13 @@ export const PostDetails = () => {
   return (
     <div>
       <h1>{post.title}</h1>
+      <button
+        onClick={() => {
+          navigate(`/edit-post/${postId}`);
+        }}
+      >
+        Edit Post
+      </button>
       <div>edit/delete button, category</div>
       <img src={post.image_url} alt="img from user post" />
       <aside>tags</aside>
