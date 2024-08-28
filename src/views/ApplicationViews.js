@@ -5,6 +5,7 @@ import { Authorized } from './Authorized';
 import { HomePage } from '../components/HomePage';
 import { CreatePost } from '../components/posts/CreatePost';
 import { PostDetails } from '../components/posts/PostDetails';
+import { CreateCategory } from '../components/categories/CreateCategory';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -16,6 +17,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/" element={<HomePage />} />
           <Route path="/createPost" element={<CreatePost token={token}/>} />
           <Route path="/postDetails/:postId" element={<PostDetails />} />
+          <Route path="/createCategory" element={<CreateCategory />} />
           {/* route to specific post id */}
         </Route>
       </Routes>
