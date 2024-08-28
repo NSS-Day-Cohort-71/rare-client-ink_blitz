@@ -7,13 +7,15 @@
 // call addPost() function
 // application navigates to "Post Details View"
 
-import { useRef } from 'react';
-import { addPost } from '../../managers/PostManager.js';
+import { useRef } from "react";
+import { addPost } from "../../managers/PostManager.js";
+import { useNavigate } from "react-router-dom";
 
 export const CreatePost = ({ token }) => {
   const title = useRef();
   const imageUrl = useRef();
   const content = useRef();
+  const navigate = useNavigate();
   // const categoryId = useRef() | consider useState() for category dropdown per Chat
 
   const handleSubmit = async (e) => {
@@ -27,8 +29,8 @@ export const CreatePost = ({ token }) => {
       category_id: 2,
     };
 
-    await addPost(newPostObject);
-
+    const newPostId = await addPost(newPostObject);
+    navigate(`/postDetails/${newPostId}`);
     // Add navigate functionality
   };
 
