@@ -14,6 +14,17 @@ export const addPost = async (postObject) => {
 };
 
 export const getPost = async (postId) => {
+
+    const response = await fetch(
+        `http://localhost:8088/posts/${postId}`)
+        return await response.json()
+}
+
+export const postList = async () => {
+    const response = fetch('http://localhost:8088/posts')
+    return (await response).json()
+}
+
   const response = await fetch(`http://localhost:8088/posts/${postId}`);
   return await response.json();
 };
@@ -34,3 +45,4 @@ export const editPost = async (post) => {
 
   return await response.json();
 };
+
