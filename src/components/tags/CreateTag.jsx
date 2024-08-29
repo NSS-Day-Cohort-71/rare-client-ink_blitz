@@ -1,36 +1,36 @@
-// define CreateCategory() function
+// define CreateTag() function
     // define useRef() state for category title input
 
 import { useNavigate } from "react-router-dom"
-import { addCategory } from "../../managers/CategoryManager"
 import { useRef } from "react"
-
-    // define handleSubmit() function that calls addCategory()
-
-    // return JSX with form for creating a category
-        // includes an <h1>, an input, and a button
-
-export const CreateCategory = () => {
+import { addTag } from "../../managers/TagManager"
+    
+        // define handleSubmit() function that calls addCategory()
+    
+        // return JSX with form for creating a category
+            // includes an <h1>, an input, and a button
+    
+export const CreateTag = () => {
     const navigate = useNavigate()
     const label = useRef()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const newCategoryObj = {
+        const newTagObj = {
             label: label.current.value
         }
 
-        await addCategory(newCategoryObj)
+        await addTag(newTagObj)
         
         navigate("/")
-        // should navigate to "/categoryManager"
+        // should navigate to "/tagManager"
     }
 
     return (
         <section className="columns is-centered">
             <form className="column is-two-thirds" onSubmit={handleSubmit}>
-                <h1 className="title">Create a new category</h1>
+                <h1 className="title">Create a new tag</h1>
 
                 <div className="field">
                 <div className="control">
