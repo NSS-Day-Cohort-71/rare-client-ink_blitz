@@ -25,9 +25,7 @@ export const postList = async () => {
     return (await response).json()
 }
 
-  const response = await fetch(`http://localhost:8088/posts/${postId}`);
-  return await response.json();
-};
+
 
 export const editPost = async (post) => {
   const response = await fetch(`http://localhost:8088/posts/${post.id}`, {
