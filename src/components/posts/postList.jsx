@@ -19,7 +19,7 @@ export const AllPosts = () => {
       {posts.map((post, index) => (
         <div key={index} value={post.id}>
           <div>
-            <img src={post.image_url} />
+            <img src={post.image_url} alt="img from post" />
           </div>
           <Link to={`/postDetails/${post.id}`}>
             <div>{post.title}</div>
@@ -29,7 +29,7 @@ export const AllPosts = () => {
             Edit
           </button>
           <div>
-            <HumanDate date={post.publication_date} />
+            Published: <HumanDate date={post.publication_date} />
           </div>
           <div>{post.username}</div>
         </div>
