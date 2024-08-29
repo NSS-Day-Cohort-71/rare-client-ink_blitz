@@ -1,8 +1,4 @@
 export const HumanDate = ({ date }) => {
-  if (!date) {
-    return 'Invalid Date';
-  }
-
   return new Date(date.replace(/-/g, '\/')).toLocaleDateString("en-US",
     {
       weekday: 'long',
@@ -12,4 +8,3 @@ export const HumanDate = ({ date }) => {
       timeZone: 'America/Chicago'
     })
 }
-
