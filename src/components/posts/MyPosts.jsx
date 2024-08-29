@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { postList } from "../../managers/PostManager";
+import { useEffect, useState } from 'react';
+import { postList } from '../../managers/PostManager';
+import { useNavigate } from 'react-router-dom';
 
 export const MyPosts = ({ token }) => {
   const [allPosts, setAllPosts] = useState([]);
+  const navigate = useNavigate();
 
   const getAndSetPosts = () => {
     postList().then((postsArray) => {
@@ -19,6 +21,7 @@ export const MyPosts = ({ token }) => {
   return (
     <>
       <div>
+        <button onClick={() => navigate('/createPost')}>Add Post</button>
         {allPosts.map((myPost) => (
           <div key={myPost.id}>
             <div>
