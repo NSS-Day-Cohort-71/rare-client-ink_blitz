@@ -16,14 +16,16 @@ export const AllProfiles = () => {
 
   return users.map((user) => {
     return (
-      <ul key={user.id}>
-        <Link to={`/users/${user.id}`}>
-          <li>
-            Full name: {user.first_name} {user.last_name}
-          </li>
-          <li>Username: {user.username}</li>
-        </Link>
-      </ul>
+      <div key={user.id}>
+        <ul>
+          <Link to={`/users/${user.id}`}>
+            <li>
+              Full name: {user.first_name} {user.last_name}
+            </li>
+            <li>Username: {user.username}</li>
+          </Link>
+        </ul>
+      </div>
     );
   });
 };
