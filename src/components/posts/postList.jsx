@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { postList } from '../../managers/PostManager';
-import { HumanDate } from '../utils/HumanDate.js';
+import { useEffect, useState } from "react";
+import { postList } from "../../managers/PostManager";
+import { HumanDate } from "../utils/HumanDate.js";
 
 export const AllPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -16,12 +16,12 @@ export const AllPosts = () => {
       {posts.map((post, index) => (
         <div key={index} value={post.id}>
           <div>
-            <img src={post.image_url} />
+            <img src={post.image_url} alt="img from post" />
           </div>
           <div>{post.title}</div>
           <div>{post.content}</div>
           <div>
-            <HumanDate date={post.publication_date} />
+            Published: <HumanDate date={post.publication_date} />
           </div>
           <div>{post.username}</div>
         </div>

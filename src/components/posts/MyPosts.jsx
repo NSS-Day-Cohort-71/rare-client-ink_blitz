@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { postList } from "../../managers/PostManager";
+import { HumanDate } from "../utils/HumanDate";
 
 export const MyPosts = ({ token }) => {
   const [allPosts, setAllPosts] = useState([]);
@@ -29,7 +30,9 @@ export const MyPosts = ({ token }) => {
                 <div>
                   <h2>{myPost.title}</h2>
                 </div>
-                <div>Publication Date: {myPost.publication_date}</div>
+                <div>
+                  Published: <HumanDate date={myPost.publication_date} />
+                </div>
               </div>
               <div>
                 <img src={myPost.image_url} alt="img from post" />
