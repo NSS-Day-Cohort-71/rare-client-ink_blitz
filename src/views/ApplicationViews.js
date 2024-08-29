@@ -7,6 +7,7 @@ import { CreatePost } from '../components/posts/CreatePost';
 import { PostDetails } from '../components/posts/PostDetails';
 import { CreateCategory } from '../components/categories/CreateCategory';
 import { EditPost } from '../components/posts/EditPost';
+import { AllProfiles } from '../components/users/AllProfiles';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -24,6 +25,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             path="/edit-post/:postId"
             element={<EditPost token={token} />}
           />
+          <Route path="/userManager" element={<AllProfiles />} />
         </Route>
       </Routes>
     </>
