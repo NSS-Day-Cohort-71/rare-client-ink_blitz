@@ -1,9 +1,7 @@
-
 import { useEffect, useState } from 'react';
 import { postList } from '../../managers/PostManager';
 import { useNavigate } from 'react-router-dom';
-import { HumanDate } from "../utils/HumanDate";
-
+import { HumanDate } from '../utils/HumanDate';
 
 export const MyPosts = ({ token }) => {
   const [allPosts, setAllPosts] = useState([]);
@@ -45,6 +43,13 @@ export const MyPosts = ({ token }) => {
               <div>
                 <div>{myPost.author_name}</div>
                 <div>{myPost.reaction_count}</div>
+                <button
+                  onClick={() => {
+                    navigate(`/edit-post/${myPost.id}`);
+                  }}
+                >
+                  Edit
+                </button>
                 <div>edit/delete buttons</div>
               </div>
             </section>
