@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAllUsers } from '../../managers/UserManager';
+import { Link } from 'react-router-dom';
 
 export const AllProfiles = () => {
   const [users, setUsers] = useState([]);
@@ -15,12 +16,14 @@ export const AllProfiles = () => {
 
   return users.map((user) => {
     return (
-      <div>
-        <div>
-          Full name: {user.first_name} {user.last_name}
-        </div>
-        <div>Username: {user.username}</div>
-      </div>
+      <ul key={user.id}>
+        <Link to={`/users/${user.id}`}>
+          <li>
+            Full name: {user.first_name} {user.last_name}
+          </li>
+          <li>Username: {user.username}</li>
+        </Link>
+      </ul>
     );
   });
 };
