@@ -21,8 +21,8 @@ export const getPost = async (postId) => {
 }
 
 export const postList = async () => {
-    const response = fetch('http://localhost:8088/posts')
-    return (await response).json()
+    const response = await fetch('http://localhost:8088/posts')
+    return await response.json()
 }
 
 
