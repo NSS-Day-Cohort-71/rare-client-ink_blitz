@@ -7,9 +7,11 @@ import { PostDetails } from '../components/posts/PostDetails';
 import { CreateCategory } from '../components/categories/CreateCategory';
 import { EditPost } from '../components/posts/EditPost';
 import { AllProfiles } from '../components/users/AllProfiles';
+import { UserDetails } from '../components/users/UserDetails';
 import { CreateTag } from '../components/tags/CreateTag';
 import { AllPosts } from '../components/posts/postList';
 import { HomePage } from '../components/HomePage';
+
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -30,6 +32,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             element={<EditPost token={token} />}
           />
           <Route path="/userManager" element={<AllProfiles />} />
+          <Route path="/users/:userId" element={<UserDetails />} />
         </Route>
       </Routes>
     </>
