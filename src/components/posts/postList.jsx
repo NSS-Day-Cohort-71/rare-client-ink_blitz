@@ -28,7 +28,7 @@ export const AllPosts = () => {
     <div>
       <button onClick={() => navigate('/createPost')}>Add Post</button>
       {posts.map((post, index) => (
-        <div key={index} value={post.id}>
+        <div key={index} value={post.id} className='postBorder'>
           <div className='postImages'>
             <img src={post.image_url} alt="img from post" />
           </div>
@@ -36,10 +36,13 @@ export const AllPosts = () => {
             <div>{post.title}</div>
           </Link>
           <div>{post.content}</div>
-          <button onClick={() => navigate(`/edit-post/${post.id}`)}>
-            Edit
-          </button>
-          <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+            <div className='buttons'>
+            <button onClick={() => navigate(`/edit-post/${post.id}`)}>
+              Edit
+            </button>
+            <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+            </div>
+          <div/>
           <div>
             Published: <HumanDate date={post.publication_date} />
           </div>
