@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postList } from '../../managers/PostManager';
+import { deletePost, postList } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate.js';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,16 @@ export const AllPosts = () => {
       setPosts(postArray);
     });
   }, []);
+
+  const handleDeletePost = async (postId) => {
+    let confirmDelete = window.confirm('Are you sure you want to delete?');
+    if (confirmDelete) {
+      await deletePost(postId);
+      postList().then((postArray) => {
+        setPosts(postArray);
+      });
+    }
+  };
 
   return (
     <div>
@@ -28,6 +38,7 @@ export const AllPosts = () => {
           <button onClick={() => navigate(`/edit-post/${post.id}`)}>
             Edit
           </button>
+          <button onClick={() => handleDeletePost(post.id)}>Delete</button>
           <div>
             Published: <HumanDate date={post.publication_date} />
           </div>

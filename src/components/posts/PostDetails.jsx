@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getPost } from '../../managers/PostManager';
+import { deletePost, getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
 
 /* 
@@ -26,6 +26,16 @@ export const PostDetails = () => {
     getAndSetPost();
   }, [postId]);
 
+  const handleDeletePost = async (postId) => {
+    const confirm = window.confirm(
+      'Are you sure you want to delete this post?'
+    );
+    if (confirm) {
+      await deletePost(postId);
+      navigate('/myPosts');
+    }
+  };
+
   return (
     <div>
       <h1>{post.title}</h1>
@@ -36,7 +46,8 @@ export const PostDetails = () => {
       >
         Edit Post
       </button>
-      <div>edit/delete button, category</div>
+      <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+      <div>category</div>
       <img src={post.image_url} alt="img from user post" />
       <aside>tags</aside>
       <div>
