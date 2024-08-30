@@ -1,6 +1,5 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../../managers/AuthManager';
 
 export const Register = ({ setToken }) => {
@@ -12,11 +11,24 @@ export const Register = ({ setToken }) => {
   const password = useRef();
   const verifyPassword = useRef();
   const passwordDialog = useRef();
+  const errorDialog = useRef();
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
 
+    // Check if all required fields are filled
+    if (
+      !firstName.current.value ||
+      !lastName.current.value ||
+      !email.current.value ||
+      !username.current.value
+    ) {
+      errorDialog.current.showModal();
+      return;
+    }
+
+    // Check if passwords match
     if (password.current.value === verifyPassword.current.value) {
       const newUser = {
         username: username.current.value,
@@ -44,34 +56,38 @@ export const Register = ({ setToken }) => {
         <p>Passwords do not match. Please try again.</p>
         <button onClick={() => passwordDialog.current.close()}>Close</button>
       </dialog>
+      <dialog ref={errorDialog}>
+        <p>All fields are required. Please fill out all fields.</p>
+        <button onClick={() => errorDialog.current.close()}>Close</button>
+      </dialog>
       <form className="column is-two-thirds" onSubmit={handleRegister}>
         <h1 className="title">Rare Publishing</h1>
         <p className="subtitle">Create an account</p>
         <div className="field">
           <label className="label">First Name</label>
           <div className="control">
-            <input className="input" type="text" ref={firstName} />
+            <input className="input" type="text" ref={firstName} required />
           </div>
         </div>
 
         <div className="field">
           <label className="label">Last Name</label>
           <div className="control">
-            <input className="input" type="text" ref={lastName} />
+            <input className="input" type="text" ref={lastName} required />
           </div>
         </div>
 
         <div className="field">
           <label className="label">Username</label>
           <div className="control">
-            <input className="input" type="text" ref={username} />
+            <input className="input" type="text" ref={username} required />
           </div>
         </div>
 
         <div className="field">
           <label className="label">Email</label>
           <div className="control">
-            <input className="input" type="email" ref={email} />
+            <input className="input" type="email" ref={email} required />
           </div>
         </div>
 
