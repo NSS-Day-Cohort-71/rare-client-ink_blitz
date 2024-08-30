@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { deletePost, postList } from '../../managers/PostManager';
 import { useNavigate } from 'react-router-dom';
 import { HumanDate } from '../utils/HumanDate';
-import "/root/workspace/python/rare/client/src/styles/postStyles.css"
+import "../../styles/postStyles.css"
 
 export const MyPosts = ({ token }) => {
   const [allPosts, setAllPosts] = useState([]);
