@@ -20,8 +20,11 @@ export const AllTags = () => {
       <button onClick={() => navigate('/createTag')}>Create Tag</button>
       {tags.map((tag) => {
         return (
-          <div>
-            <button>edit</button> <button>delete</button> {tag.label}
+          <div key={tag.id}>
+            <button onClick={() => navigate(`/edit-tag/${tag.id}`)}>
+              edit
+            </button>{' '}
+            <button>delete</button> {tag.label}
           </div>
         );
       })}
