@@ -13,7 +13,7 @@ import { AllPosts } from '../components/posts/postList';
 import { HomePage } from '../components/HomePage';
 import { MyPosts } from '../components/posts/MyPosts';
 import { CategoryList } from '../components/categories/CategoryList';
-
+import { AllTags } from '../components/tags/TagList';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -34,6 +34,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
+          <Route path="tags" element={<AllTags />} />
           {/* route to specific post id */}
           <Route
             path="/edit-post/:postId"
