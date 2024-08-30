@@ -4,6 +4,7 @@ import { deletePost, getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
 import "/root/workspace/python/rare/client/src/styles/postStyles.css"
 
+
 /* 
 - Define post details function
 - useParams to get specific url id pass to getPostById
@@ -29,11 +30,11 @@ export const PostDetails = () => {
 
   const handleDeletePost = async (postId) => {
     const confirm = window.confirm(
-      'Are you sure you want to delete this post?'
+      "Are you sure you want to delete this post?"
     );
     if (confirm) {
       await deletePost(postId);
-      navigate('/myPosts');
+      navigate("/myPosts");
     }
   };
 
@@ -58,7 +59,11 @@ export const PostDetails = () => {
         <div>
           Published: <HumanDate date={post.publication_date} />
         </div>
-        <div>comment button</div>
+        <div>
+          <button onClick={() => navigate(`/postComments/${post.id}`)}>
+            View Comments
+          </button>
+        </div>
         <div>emojis</div>
       </div>
       <div>{post.content}</div>

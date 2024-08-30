@@ -34,7 +34,7 @@ export const EditTag = () => {
   return (
     <section className="columns is-centered">
       <form className="column is-two-thirds" onSubmit={handleSubmit}>
-        <h1 className="title">Create a new tag</h1>
+        <h1 className="title">Edit tag</h1>
 
         <div className="field">
           <div className="control">

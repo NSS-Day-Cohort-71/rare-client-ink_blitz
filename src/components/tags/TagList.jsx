@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAllTags } from '../../managers/TagManager';
+import { deleteTag, getAllTags } from '../../managers/TagManager';
 import { useNavigate } from 'react-router-dom';
 
 // define TagList() function
@@ -11,9 +11,18 @@ export const AllTags = () => {
     const tagData = await getAllTags();
     setTags(tagData);
   };
+
   useEffect(() => {
     getTags();
   }, []);
+
+  const handleDeleteTag = async (tagId) => {
+    let confirmDelete = window.confirm('Are you sure you want to delete?');
+    if (confirmDelete) {
+      await deleteTag(tagId);
+      await getTags(); // Ensure tags are re-fetched after deletion
+    }
+  };
 
   return (
     <div>
@@ -24,7 +33,8 @@ export const AllTags = () => {
             <button onClick={() => navigate(`/edit-tag/${tag.id}`)}>
               edit
             </button>{' '}
-            <button>delete</button> {tag.label}
+            <button onClick={() => handleDeleteTag(tag.id)}>delete</button>
+            {tag.label}
           </div>
         );
       })}

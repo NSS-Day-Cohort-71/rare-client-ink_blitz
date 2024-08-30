@@ -19,6 +19,12 @@ export const getAllTags = async () => {
   return tags;
 };
 
+export const deleteTag = async (tagId) => {
+  return await fetch(`http://localhost:8088/tags/${tagId}`, {
+    method: 'DELETE',
+  });
+};
+
 export const getTagById = async (tagId) => {
   const response = await fetch(`http://localhost:8088/tags/${tagId}`);
   const tag = await response.json();
@@ -35,3 +41,4 @@ export const editTag = async (tagObj) => {
     body: JSON.stringify(tagObj),
   });
 };
+
