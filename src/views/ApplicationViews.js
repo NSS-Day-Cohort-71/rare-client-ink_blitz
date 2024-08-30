@@ -12,7 +12,7 @@ import { CreateTag } from '../components/tags/CreateTag';
 import { AllPosts } from '../components/posts/postList';
 import { HomePage } from '../components/HomePage';
 import { MyPosts } from '../components/posts/MyPosts';
-
+import { AllTags } from '../components/tags/TagList';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -28,6 +28,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/myPosts" element={<MyPosts token={token} />} />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
+          <Route path="tags" element={<AllTags />} />
           {/* route to specific post id */}
           <Route
             path="/edit-post/:postId"
