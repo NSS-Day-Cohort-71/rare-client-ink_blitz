@@ -35,6 +35,7 @@ export const AllPosts = () => {
           <Link to={`/postDetails/${post.id}`}>
             <div>{post.title}</div>
           </Link>
+
           <div>{post.content}</div>
             <div className='buttons'>
             <button onClick={() => navigate(`/edit-post/${post.id}`)}>
@@ -43,10 +44,11 @@ export const AllPosts = () => {
             <button onClick={() => handleDeletePost(post.id)}>Delete</button>
             </div>
           <div/>
+
           <div>
             Published: <HumanDate date={post.publication_date} />
           </div>
-          <div>{post.username}</div>
+          <div>By: {post.username}</div>
         </div>
       ))}
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { deletePost, postList } from '../../managers/PostManager';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HumanDate } from '../utils/HumanDate';
 import "/root/workspace/python/rare/client/src/styles/postStyles.css"
 
@@ -39,17 +39,20 @@ export const MyPosts = ({ token }) => {
             <section>
               <div>
                 <div>
-                  <h2>{myPost.title}</h2>
+                  <h2>
+                    <Link to={`/postDetails/${myPost.id}`}>{myPost.title}</Link>
+                  </h2>
                 </div>
                 <div className='date'>
                   Published: <HumanDate date={myPost.publication_date} />
                 </div>
               </div>
+
               <div className='postImages'>
                 <img src={myPost.image_url} alt="img from post" />
               </div>
               <div className='buttons'>
-                <div>{myPost.author_name}</div>
+                <div>{myPost.author_name}</div> 
                 <div>{myPost.reaction_count}</div>
                 <button
                   onClick={() => {
