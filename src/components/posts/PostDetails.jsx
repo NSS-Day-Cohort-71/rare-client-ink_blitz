@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deletePost, getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
-import "/root/workspace/python/rare/client/src/styles/postStyles.css"
+import "../../styles/postStyles.css"
 
 
 /* 
