@@ -15,6 +15,7 @@ import { MyPosts } from '../components/posts/MyPosts';
 import { CategoryList } from '../components/categories/CategoryList';
 import { AllTags } from '../components/tags/TagList';
 import { EditTag } from '../components/tags/EditTag';
+import { AllComments } from '../components/comments/commentList';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -43,6 +44,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           />
           <Route path="/userManager" element={<AllProfiles />} />
           <Route path="/users/:userId" element={<UserDetails />} />
+          <Route path="/postComments/:postId" element={<AllComments token={token} />}  />
         </Route>
       </Routes>
     </>
