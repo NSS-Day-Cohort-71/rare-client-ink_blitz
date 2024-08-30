@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postList } from '../../managers/PostManager';
+import { deletePost, postList } from '../../managers/PostManager';
 import { useNavigate } from 'react-router-dom';
 import { HumanDate } from '../utils/HumanDate';
 
@@ -19,6 +19,13 @@ export const MyPosts = ({ token }) => {
     getAndSetPosts();
   }, [token]);
 
+  const handleDeletePost = async (postId) => {
+    let confirmDelete = window.confirm('Are you sure you want to delete?');
+    if (confirmDelete) {
+      await deletePost(postId);
+      getAndSetPosts();
+    }
+  };
   return (
     <>
       <div>
@@ -50,7 +57,9 @@ export const MyPosts = ({ token }) => {
                 >
                   Edit
                 </button>
-                <div>edit/delete buttons</div>
+                <button onClick={() => handleDeletePost(myPost.id)}>
+                  Delete
+                </button>
               </div>
             </section>
           </div>
