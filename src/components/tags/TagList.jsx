@@ -13,7 +13,7 @@ export const AllTags = () => {
   };
   useEffect(() => {
     getTags();
-  });
+  }, []);
 
   return (
     <div>
