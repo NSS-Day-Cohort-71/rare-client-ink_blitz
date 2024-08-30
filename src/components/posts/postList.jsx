@@ -34,7 +34,7 @@ export const AllPosts = () => {
           <Link to={`/postDetails/${post.id}`}>
             <div>{post.title}</div>
           </Link>
-          <div>{post.content}</div>
+          <div>Content: {post.content}</div>
           <button onClick={() => navigate(`/edit-post/${post.id}`)}>
             Edit
           </button>
@@ -42,7 +42,7 @@ export const AllPosts = () => {
           <div>
             Published: <HumanDate date={post.publication_date} />
           </div>
-          <div>{post.username}</div>
+          <div>By: {post.username}</div>
         </div>
       ))}
     </div>
