@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { deletePost, postList } from '../../managers/PostManager';
 import { Link, useNavigate } from 'react-router-dom';
 import { HumanDate } from '../utils/HumanDate';
+import "/root/workspace/python/rare/client/src/styles/postStyles.css"
 
 export const MyPosts = ({ token }) => {
   const [allPosts, setAllPosts] = useState([]);
@@ -31,7 +32,7 @@ export const MyPosts = ({ token }) => {
       <div>
         <button onClick={() => navigate('/createPost')}>Add Post</button>
         {allPosts.map((myPost) => (
-          <div key={myPost.id}>
+          <div key={myPost.id} className='postBorder'>
             <div>
               <h1>{myPost.username}</h1>
             </div>
@@ -42,16 +43,16 @@ export const MyPosts = ({ token }) => {
                     <Link to={`/postDetails/${myPost.id}`}>{myPost.title}</Link>
                   </h2>
                 </div>
-                <div>
+                <div className='date'>
                   Published: <HumanDate date={myPost.publication_date} />
                 </div>
               </div>
-              <div>Content: {myPost.content}</div>
-              <div>
+
+              <div className='postImages'>
                 <img src={myPost.image_url} alt="img from post" />
               </div>
-              <div>
-                <div>Author: {myPost.author_name}</div>
+              <div className='buttons'>
+                <div>{myPost.author_name}</div> 
                 <div>{myPost.reaction_count}</div>
                 <button
                   onClick={() => {
