@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deletePost, getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
+import "/root/workspace/python/rare/client/src/styles/postStyles.css"
 
 /* 
 - Define post details function
@@ -48,7 +49,9 @@ export const PostDetails = () => {
       </button>
       <button onClick={() => handleDeletePost(post.id)}>Delete</button>
       <div>category</div>
+      <div className='postImages'>
       <img src={post.image_url} alt="img from user post" />
+      </div>
       <aside>tags</aside>
       <div>
         <div>By: {post.username}</div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { deletePost, postList } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate.js';
 import { Link, useNavigate } from 'react-router-dom';
+import "/root/workspace/python/rare/client/src/styles/postStyles.css"
 
 export const AllPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -28,7 +29,7 @@ export const AllPosts = () => {
       <button onClick={() => navigate('/createPost')}>Add Post</button>
       {posts.map((post, index) => (
         <div key={index} value={post.id}>
-          <div>
+          <div className='postImages'>
             <img src={post.image_url} alt="img from post" />
           </div>
           <Link to={`/postDetails/${post.id}`}>

@@ -1,0 +1,15 @@
+.postImages {
+    max-width: 200px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 40%;
+}
+
+.postBorder {
+    border: 5px solid #000000a6;
+    margin: 1%;
+}
+
+.buttons {
+    float: right;
+}
