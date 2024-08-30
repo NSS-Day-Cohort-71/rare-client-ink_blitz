@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { getAllCategories } from "../../managers/CategoryManager"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 // define CategoryList() function
     // define 'categories, setCategories' variable with useState() hook

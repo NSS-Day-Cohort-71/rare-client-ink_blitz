@@ -28,6 +28,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/postDetails/:postId" element={<PostDetails />} />
           <Route path="/myPosts" element={<MyPosts token={token} />} />
           <Route path="/categoryManager" element={<CategoryList />} />
+          <Route 
+            path="/categories/:categoryId" 
+            element={<>List of posts by clicked on category</>}
+          />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
           {/* route to specific post id */}
