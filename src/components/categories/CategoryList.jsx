@@ -17,7 +17,7 @@ import { Link } from "react-router-dom"
     // return JSX with list of categories as clickable items
 
 export const CategoryList = () => {
-    const [categories, setCategories] = useState()
+    const [categories, setCategories] = useState([])
     // const [newCategory, setNewCategory] = useState()
 
     const getAndSetCategories = async () => {
