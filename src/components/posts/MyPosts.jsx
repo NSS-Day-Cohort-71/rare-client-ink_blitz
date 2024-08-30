@@ -41,7 +41,7 @@ export const MyPosts = ({ token }) => {
                 <div>
                   <h2>{myPost.title}</h2>
                 </div>
-                <div>
+                <div className='date'>
                   Published: <HumanDate date={myPost.publication_date} />
                 </div>
               </div>

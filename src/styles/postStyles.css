@@ -11,5 +11,8 @@
 }
 
 .buttons {
+    margin-bottom: 6%;
+}
+.date {
     float: right;
 }
