@@ -12,7 +12,9 @@ import { CreateTag } from '../components/tags/CreateTag';
 import { AllPosts } from '../components/posts/postList';
 import { HomePage } from '../components/HomePage';
 import { MyPosts } from '../components/posts/MyPosts';
+import { CategoryList } from '../components/categories/CategoryList';
 import { AllTags } from '../components/tags/TagList';
+import { EditTag } from '../components/tags/EditTag';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -26,10 +28,15 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/createPost" element={<CreatePost token={token} />} />
           <Route path="/postDetails/:postId" element={<PostDetails />} />
           <Route path="/myPosts" element={<MyPosts token={token} />} />
+          <Route path="/categoryManager" element={<CategoryList />} />
+          <Route 
+            path="/categories/:categoryId" 
+            element={<>List of posts by clicked on category</>}
+          />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
           <Route path="/tags" element={<AllTags />} />
-          {/* route to specific post id */}
+          <Route path="edit-tag/:tagId" element={<EditTag />} />
           <Route
             path="/edit-post/:postId"
             element={<EditPost token={token} />}

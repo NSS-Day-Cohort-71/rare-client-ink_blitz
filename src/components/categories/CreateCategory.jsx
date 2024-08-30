@@ -23,7 +23,7 @@ export const CreateCategory = () => {
 
         await addCategory(newCategoryObj)
         
-        navigate("/")
+        navigate("/categoryManager")
         // should navigate to "/categoryManager"
     }
 

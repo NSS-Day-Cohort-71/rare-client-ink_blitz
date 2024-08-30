@@ -30,9 +30,15 @@ export const AllTags = () => {
       {tags.map((tag) => {
         return (
           <div key={tag.id}>
+
             <button>edit</button>
             <button onClick={() => handleDeleteTag(tag.id)}>delete</button>
             {tag.label}
+
+            <button onClick={() => navigate(`/edit-tag/${tag.id}`)}>
+              edit
+            </button>{' '}
+            <button>delete</button> {tag.label}
           </div>
         );
       })}

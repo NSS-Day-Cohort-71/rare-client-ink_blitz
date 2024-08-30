@@ -24,3 +24,21 @@ export const deleteTag = async (tagId) => {
     method: 'DELETE',
   });
 };
+
+export const getTagById = async (tagId) => {
+  const response = await fetch(`http://localhost:8088/tags/${tagId}`);
+  const tag = await response.json();
+  return tag;
+};
+
+export const editTag = async (tagObj) => {
+  return await fetch(`http://localhost:8088/tags/${tagObj.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(tagObj),
+  });
+};
+
