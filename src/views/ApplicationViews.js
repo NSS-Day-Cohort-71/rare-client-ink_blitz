@@ -28,7 +28,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/myPosts" element={<MyPosts token={token} />} />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
-          <Route path="tags" element={<AllTags />} />
+          <Route path="/tags" element={<AllTags />} />
           {/* route to specific post id */}
           <Route
             path="/edit-post/:postId"

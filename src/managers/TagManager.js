@@ -18,3 +18,9 @@ export const getAllTags = async () => {
   const tags = await response.json();
   return tags;
 };
+
+export const deleteTag = async (tagId) => {
+  return await fetch(`http://localhost:8088/tags/${tagId}`, {
+    method: 'DELETE',
+  });
+};
