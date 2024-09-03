@@ -22,3 +22,26 @@ export const getAllCategories = async () => {
     
     return categories
 }
+
+export const getCategoryById = async (categoryId) => {
+    const response = await fetch(`http://localhost:8088/categories/${categoryId}`)
+    return await response.json()
+} 
+
+export const editCategory = async (category) => {
+    const response = await fetch(
+        `http://localhost:8088/categories/${category.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify(category)
+        }
+    );
+    if (response.status === 204) {
+        return {};
+    }
+
+    return await response.json()
+}
