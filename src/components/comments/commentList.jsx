@@ -1,12 +1,14 @@
 // add
 
-
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { addComment, getAllComments, deleteComment } from '../../managers/CommentManager';
+import {
+  addComment,
+  getAllComments,
+  deleteComment,
+} from '../../managers/CommentManager';
 import { getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
-
 
 export const AllComments = ({ token }) => {
   const [comments, setComments] = useState([]);
@@ -41,7 +43,7 @@ export const AllComments = ({ token }) => {
       created_on: new Date().toDateString(),
     };
     await addComment(newCommentObject);
-    content.current.value = "";
+    content.current.value = '';
     getAllComments().then((commentArray) => {
       setComments(commentArray);
     });
@@ -78,15 +80,13 @@ export const AllComments = ({ token }) => {
                 <li>{comment.content}</li>
                 <li>Commented by: {comment.username}</li>
                 <li>
-                  <li>
-                    {comment.created_on ? (
-                      <>
-                        Comment date: <HumanDate date={comment.created_on} />
-                      </>
-                    ) : (
-                      ''
-                    )}
-                  </li>
+                  {comment.created_on ? (
+                    <>
+                      Comment date: <HumanDate date={comment.created_on} />
+                    </>
+                  ) : (
+                    ''
+                  )}
                 </li>
               </ul>
               {comment.author_id === token && (
