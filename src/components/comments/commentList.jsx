@@ -118,9 +118,12 @@ export const AllComments = ({ token }) => {
               {comment.author_id === parseInt(token) && (
                 <button onClick={() => handleDelete(comment.id)}>Delete</button>
               )}
-             <div className='buttons'>
-              <button onClick={() => openModal(comment)}>Edit</button>
-            </div>
+              <div className='buttons'>
+                {comment.author_id === parseInt(token) && (
+                  <button onClick={() => openModal(comment)}>Edit</button>
+                )}
+                
+              </div>
 
             </div>
             
