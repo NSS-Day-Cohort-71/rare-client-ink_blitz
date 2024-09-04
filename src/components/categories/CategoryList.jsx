@@ -3,7 +3,7 @@ import {
   deleteCategory,
   getAllCategories,
 } from '../../managers/CategoryManager';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // define CategoryList() function
 // define 'categories, setCategories' variable with useState() hook
@@ -19,8 +19,9 @@ import { Link, useParams } from 'react-router-dom';
 // return JSX with list of categories as clickable items
 
 export const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  // const [newCategory, setNewCategory] = useState()
+    const [categories, setCategories] = useState([])
+    const navigate = useNavigate()
+    // const [newCategory, setNewCategory] = useState()
 
   const getAndSetCategories = async () => {
     const categoriesArr = await getAllCategories();
@@ -39,9 +40,13 @@ export const CategoryList = () => {
   return (
     <section>
       <h1>Categories</h1>
-      {categories?.map((category) => {
+            <button onClick={() => navigate('/createCategory')}>Create Category</button>
+      {categories.map((category) => {
         return (
           <div key={category.id}>
+                        <button onClick={() => navigate(`/edit-category/${category.id}`)}>
+                            Edit
+                        </button>
             <ul>
               <li>
                 <Link to={`/categories/${category.id}`}>{category.label}</Link>{' '}

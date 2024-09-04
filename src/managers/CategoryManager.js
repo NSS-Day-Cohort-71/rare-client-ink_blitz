@@ -26,3 +26,22 @@ export const deleteCategory = async (categoryId) => {
     method: 'DELETE',
   });
 };
+
+
+export const getCategoryById = async (categoryId) => {
+    const response = await fetch(`http://localhost:8088/categories/${categoryId}`)
+    return await response.json()
+} 
+
+export const editCategory = async (categoryObj) => {
+    return await fetch(
+        `http://localhost:8088/categories/${categoryObj.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify(categoryObj)
+        }
+    );
+}

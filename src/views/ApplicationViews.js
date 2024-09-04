@@ -16,6 +16,7 @@ import { CategoryList } from '../components/categories/CategoryList';
 import { AllTags } from '../components/tags/TagList';
 import { EditTag } from '../components/tags/EditTag';
 import { AllComments } from '../components/comments/commentList';
+import { EditCategory } from '../components/categories/EditCategory';
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -36,6 +37,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           />
           <Route path="/createCategory" element={<CreateCategory />} />
           <Route path="/createTag" element={<CreateTag />} />
+          <Route path="/edit-category/:categoryId" element={<EditCategory />} />
           <Route path="/tags" element={<AllTags />} />
           <Route path="edit-tag/:tagId" element={<EditTag />} />
           <Route
