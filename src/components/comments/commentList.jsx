@@ -89,7 +89,7 @@ export const AllComments = ({ token }) => {
                   )}
                 </li>
               </ul>
-              {comment.author_id === token && (
+              {comment.author_id === parseInt(token) && (
                 <button onClick={() => handleDelete(comment.id)}>Delete</button>
               )}
             </div>
