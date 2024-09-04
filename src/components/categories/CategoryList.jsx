@@ -40,9 +40,6 @@ export const CategoryList = () => {
                         <button onClick={() => navigate(`/edit-category/${category.id}`)}>
                             Edit
                         </button>
-                        <button>
-                            Delete
-                        </button>
                         <ul>
                             <Link to={`/categories/${category.id}`}>
                                 <li>

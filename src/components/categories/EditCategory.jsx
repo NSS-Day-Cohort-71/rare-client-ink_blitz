@@ -4,9 +4,7 @@ import { editCategory, getCategoryById } from "../../managers/CategoryManager"
 
 export const EditCategory = () => {
     const { categoryId } = useParams()
-    const [category, setCategory] = useState({
-        label: ''
-    })
+    const [category, setCategory] = useState({ label: '' })
     const label = useRef()
     const navigate = useNavigate()
 
