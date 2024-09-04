@@ -23,3 +23,13 @@ export const deleteComment = async (commentId) => {
       method: 'DELETE',
     });
   };
+
+export const updateComment = async (updatedComment) => {
+    return await fetch(`http://localhost:8088/comments/${updatedComment.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedComment),
+    })
+}
