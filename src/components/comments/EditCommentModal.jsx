@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 
 const EditCommentModal = ({ isOpen, onRequestClose, comment, onSave }) => {
-  const [editedComment, setEditedComment] = useState(comment.content);
+  const [editedComment, setEditedComment] = useState('');
+
+  // Set the initial state when the modal opens
+  useEffect(() => {
+    if (comment) {
+      setEditedComment(comment.content);
+    }
+  }, [comment]);
 
   const handleInputChange = (e) => {
     setEditedComment(e.target.value);
@@ -10,8 +17,8 @@ const EditCommentModal = ({ isOpen, onRequestClose, comment, onSave }) => {
 
   const handleSave = () => {
     const updatedComment = { ...comment, content: editedComment };
-    onSave(updatedComment);
-    onRequestClose();
+    onSave(updatedComment);  // Pass the updated comment back to the parent component
+    onRequestClose()
   };
 
   return (
@@ -44,3 +51,4 @@ const EditCommentModal = ({ isOpen, onRequestClose, comment, onSave }) => {
 };
 
 export default EditCommentModal;
+

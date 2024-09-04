@@ -6,9 +6,11 @@ import {
   addComment,
   getAllComments,
   deleteComment,
+  updateComment
 } from '../../managers/CommentManager';
 import { getPost } from '../../managers/PostManager';
 import { HumanDate } from '../utils/HumanDate';
+import EditCommentModal from './EditCommentModal';
 
 export const AllComments = ({ token }) => {
   const [comments, setComments] = useState([]);
@@ -58,6 +60,28 @@ export const AllComments = ({ token }) => {
     });
   };
 
+  const openModal = (comment) => {
+    setSelectedComment(comment);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedComment(null);
+  };
+
+  const saveComment = async (updatedComment) => {
+    // Send the updated comment to the server
+    await updateComment(updatedComment);
+
+    // Update the comment in the local state
+    const updatedComments = comments.map((comment) =>
+      comment.id === updatedComment.id ? updatedComment : comment
+    );
+    setComments(updatedComments);
+    closeModal();
+  };
+
   return (
     <div>
       <h1>
@@ -94,7 +118,12 @@ export const AllComments = ({ token }) => {
               {comment.author_id === parseInt(token) && (
                 <button onClick={() => handleDelete(comment.id)}>Delete</button>
               )}
+             <div className='buttons'>
+              <button onClick={() => openModal(comment)}>Edit</button>
             </div>
+
+            </div>
+            
           );
         })}
       </div>
@@ -103,6 +132,7 @@ export const AllComments = ({ token }) => {
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           comment={selectedComment}
+          onSave={saveComment}
         />
       )}
     </div>
