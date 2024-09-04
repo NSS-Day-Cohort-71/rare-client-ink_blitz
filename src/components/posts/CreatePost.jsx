@@ -7,9 +7,10 @@
 // call addPost() function
 // application navigates to "Post Details View"
 
-import { useRef } from "react";
-import { addPost } from "../../managers/PostManager.js";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from 'react';
+import { addPost } from '../../managers/PostManager.js';
+import { useNavigate } from 'react-router-dom';
+import { getAllTags } from '../../managers/TagManager.js';
 
 export const CreatePost = ({ token }) => {
   const title = useRef();
@@ -17,6 +18,16 @@ export const CreatePost = ({ token }) => {
   const content = useRef();
   const navigate = useNavigate();
   // const categoryId = useRef() | consider useState() for category dropdown per Chat
+  const [tags, setTags] = useState([]);
+
+  const fetchTags = async () => {
+    const tagData = await getAllTags();
+    setTags(tagData);
+  };
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +98,11 @@ export const CreatePost = ({ token }) => {
           <div className="control">
             {/* <label>Tag</label> */}
             <div>
-              <input type="checkbox" /> Tag
+              {tags.map((tag) => (
+                <div key={tag.id}>
+                  <input type="checkbox" /> {tag.label}
+                </div>
+              ))}
             </div>
           </div>
         </div>
