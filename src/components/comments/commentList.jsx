@@ -1,9 +1,13 @@
 // add
 
-import { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { addComment, getAllComments } from '../../managers/CommentManager';
-import { getPost } from '../../managers/PostManager';
+import { useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  addComment,
+  deleteComment,
+  getAllComments,
+} from "../../managers/CommentManager";
+import { getPost } from "../../managers/PostManager";
 
 export const AllComments = ({ token }) => {
   const [comments, setComments] = useState([]);
@@ -37,10 +41,14 @@ export const AllComments = ({ token }) => {
       content: content.current.value,
     };
     await addComment(newCommentObject);
-    content.current.value = '';
+    content.current.value = "";
     getAllComments().then((commentArray) => {
       setComments(commentArray);
     });
+  };
+
+  const handleDelete = async (commentId) => {
+    await deleteComment(commentId);
   };
 
   return (
@@ -67,6 +75,7 @@ export const AllComments = ({ token }) => {
                 <li>{comment.content}</li>
                 <li>{comment.username}</li>
               </ul>
+              <button onClick={() => handleDelete(comment.id)}>Delete</button>
             </div>
           );
         })}
