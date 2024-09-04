@@ -19,7 +19,7 @@ export const addComment = async (commentObj) => {
 }
 
 export const deleteComment = async (commentId) => {
-    return await fetch(`http://localhost:8088/tags/${commentId}`, {
+    return await fetch(`http://localhost:8088/comments/${commentId}`, {
       method: 'DELETE',
     });
   };

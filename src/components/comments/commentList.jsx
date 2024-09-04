@@ -49,6 +49,9 @@ export const AllComments = ({ token }) => {
 
   const handleDelete = async (commentId) => {
     await deleteComment(commentId);
+    getAllComments().then((commentArray) => {
+      setComments(commentArray);
+    });
   };
 
   return (
@@ -75,7 +78,9 @@ export const AllComments = ({ token }) => {
                 <li>{comment.content}</li>
                 <li>{comment.username}</li>
               </ul>
-              <button onClick={() => handleDelete(comment.id)}>Delete</button>
+              {comment.author_id === token && (
+                <button onClick={() => handleDelete(comment.id)}>Delete</button>
+              )}
             </div>
           );
         })}
