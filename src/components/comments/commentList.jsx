@@ -16,6 +16,8 @@ export const AllComments = ({ token }) => {
   const [post, setPost] = useState({});
   const content = useRef();
   const { postId } = useParams();
+  const [selectedComment, setSelectedComment] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getPost(postId).then((postData) => {
@@ -96,6 +98,13 @@ export const AllComments = ({ token }) => {
           );
         })}
       </div>
+      {selectedComment && (
+        <EditCommentModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          comment={selectedComment}
+        />
+      )}
     </div>
   );
 };
