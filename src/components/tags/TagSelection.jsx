@@ -55,12 +55,18 @@ export const TagSelection = () => {
 
     console.log('New tags to be added:', newCheckedTags);
 
-    const addTagPromises = newCheckedTags.forEach(async (checkedTag) => {
-      const postTagToSend = { tag_id: checkedTag.id, post_id: postId };
-      addPostTag(postTagToSend).then();
-    });
+    await Promise.all(
+      newCheckedTags.map(async (checkedTag) => {
+        const postTagToSend = { tag_id: checkedTag.id, post_id: postId };
+        await addPostTag(postTagToSend);
+      })
+    );
 
-    navigate(`/postDetails/${postId}?refresh=true`, { replace: true });
+    // Fetch the updated post tags
+    await fetchPostTags();
+
+    // Navigate to the updated PostDetails
+    navigate(`/postDetails/${postId}`);
   };
 
   return (
