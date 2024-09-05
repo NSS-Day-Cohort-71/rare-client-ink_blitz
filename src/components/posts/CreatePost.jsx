@@ -7,9 +7,11 @@
 // call addPost() function
 // application navigates to "Post Details View"
 
-import { useRef } from "react";
-import { addPost } from "../../managers/PostManager.js";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from 'react';
+import { addPost } from '../../managers/PostManager.js';
+import { useNavigate } from 'react-router-dom';
+import { getAllTags } from '../../managers/TagManager.js';
+import { addPostTag } from '../../managers/PostTagManager.js';
 
 export const CreatePost = ({ token }) => {
   const title = useRef();
@@ -17,6 +19,28 @@ export const CreatePost = ({ token }) => {
   const content = useRef();
   const navigate = useNavigate();
   // const categoryId = useRef() | consider useState() for category dropdown per Chat
+  const [tags, setTags] = useState([]);
+  const [checkedTags, setCheckedTags] = useState([]);
+
+  const fetchTags = async () => {
+    const tagData = await getAllTags();
+    setTags(tagData);
+  };
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
+
+  const handleTagSelect = (event, tag) => {
+    let onlyChecked = [];
+    if (event.target.checked) {
+      onlyChecked = [...checkedTags, tag];
+      setCheckedTags(onlyChecked);
+    } else {
+      onlyChecked = [...checkedTags].filter((t) => t.id !== tag.id);
+      setCheckedTags(onlyChecked);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +54,13 @@ export const CreatePost = ({ token }) => {
     };
 
     const newPostId = await addPost(newPostObject);
+    for (const tag of checkedTags) {
+      const postTag = {
+        tag_id: tag.id,
+        post_id: newPostId,
+      };
+      await addPostTag(postTag);
+    }
     navigate(`/postDetails/${newPostId}`);
     // Add navigate functionality
   };
@@ -87,7 +118,15 @@ export const CreatePost = ({ token }) => {
           <div className="control">
             {/* <label>Tag</label> */}
             <div>
-              <input type="checkbox" /> Tag
+              {tags.map((tag) => (
+                <div key={tag.id}>
+                  <input
+                    onChange={(event) => handleTagSelect(event, tag)}
+                    type="checkbox"
+                  />{' '}
+                  {tag.label}
+                </div>
+              ))}
             </div>
           </div>
         </div>

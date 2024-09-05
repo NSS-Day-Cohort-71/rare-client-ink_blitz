@@ -41,4 +41,3 @@ export const editTag = async (tagObj) => {
     body: JSON.stringify(tagObj),
   });
 };
-
