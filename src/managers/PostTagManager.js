@@ -8,3 +8,8 @@ export const addPostTag = async (postTagObj) => {
     body: JSON.stringify(postTagObj),
   });
 };
+export const getPostTags = async (postId) => {
+  const response = await fetch(`http://localhost:8088/postTags/${postId}`);
+  const postTags = await response.json();
+  return postTags;
+};
