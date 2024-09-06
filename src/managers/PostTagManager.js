@@ -13,3 +13,9 @@ export const getPostTags = async (postId) => {
   const postTags = await response.json();
   return postTags;
 };
+
+export const removePostTag = async (postTagId) => {
+  return await fetch (`http://localhost:8088/postTags/${postTagId}`, {
+    method: 'DELETE'
+  })
+}
