@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { deletePost, getPost } from '../../managers/PostManager';
-import { HumanDate } from '../utils/HumanDate';
-import '../../styles/postStyles.css';
-import { getPostTags } from '../../managers/PostTagManager';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { deletePost, getPost } from "../../managers/PostManager";
+import { HumanDate } from "../utils/HumanDate";
+import "../../styles/postStyles.css";
+import { getPostTags } from "../../managers/PostTagManager";
 
 /* 
 - Define post details function
@@ -36,11 +36,11 @@ export const PostDetails = () => {
 
   const handleDeletePost = async (postId) => {
     const confirm = window.confirm(
-      'Are you sure you want to delete this post?'
+      "Are you sure you want to delete this post?"
     );
     if (confirm) {
       await deletePost(postId);
-      navigate('/myPosts');
+      navigate("/myPosts");
     }
   };
 
@@ -56,7 +56,10 @@ export const PostDetails = () => {
           Edit Post
         </button>
         <button onClick={() => handleDeletePost(post.id)}>Delete</button>
-        <div>category</div>
+        <div>
+          category:
+          {post.category_label}
+        </div>
         <div className="postImages">
           <img src={post.image_url} alt="img from user post" />
         </div>

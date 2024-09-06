@@ -1,27 +1,41 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { editPost, getPost } from '../../managers/PostManager';
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { editPost, getPost } from "../../managers/PostManager";
+import { getAllCategories } from "../../managers/CategoryManager";
 
 export const EditPost = ({ token }) => {
   const [post, setPost] = useState({
-    title: '',
-    image_url: '',
-    content: '',
+    title: "",
+    image_url: "",
+    content: "",
+    category_id: 0,
   });
   const { postId } = useParams();
   const title = useRef();
   const image_url = useRef();
   const content = useRef();
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(0);
 
   const getAndSetPost = async () => {
     const postObject = await getPost(postId);
     setPost(postObject);
   };
 
+  const fetchCategories = async () => {
+    const categoryData = await getAllCategories();
+    setCategories(categoryData);
+  };
+
   useEffect(() => {
     getAndSetPost();
+    fetchCategories();
   }, [postId]);
+
+  useEffect(() => {
+    setSelectedCategory(post.category_id);
+  }, [post]);
 
   const handleTitleChange = (e) => {
     const copy = { ...post };
@@ -38,6 +52,13 @@ export const EditPost = ({ token }) => {
   const handleContentChange = (e) => {
     const copy = { ...post };
     copy.content = e.target.value;
+    setPost(copy);
+  };
+
+  const handleCategoryChange = (e) => {
+    const copy = { ...post };
+    copy.category_id = parseInt(e.target.value);
+    setSelectedCategory(copy.category_id);
     setPost(copy);
   };
 
@@ -98,20 +119,13 @@ export const EditPost = ({ token }) => {
         </div>
 
         <div className="field">
-          <select>
-            <option value="0" disabled>
-              (Category select)
-            </option>
+          <select value={selectedCategory} onChange={handleCategoryChange}>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.label}
+              </option>
+            ))}
           </select>
-        </div>
-
-        <div className="field">
-          <div className="control">
-            {/* <label>Tag</label> */}
-            <div>
-              <input type="checkbox" /> Tag
-            </div>
-          </div>
         </div>
 
         <div className="field">
