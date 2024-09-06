@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllTags } from '../../managers/TagManager';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addPostTag, getPostTags } from '../../managers/PostTagManager';
+import { addPostTag, getPostTags, removePostTag } from '../../managers/PostTagManager';
 
 export const TagSelection = () => {
   const [tags, setTags] = useState([]);
@@ -53,12 +53,24 @@ export const TagSelection = () => {
         !postTags.some((postTag) => postTag.tag_id === checkedTag.id)
     );
 
+    let uncheckedTags = postTags.filter(
+      (postTag) =>
+        !checkedTags.some((checkedTag) => checkedTag.id === postTag.tag_id)
+    );
+
     console.log('New tags to be added:', newCheckedTags);
 
     await Promise.all(
       newCheckedTags.map(async (checkedTag) => {
         const postTagToSend = { tag_id: checkedTag.id, post_id: postId };
         await addPostTag(postTagToSend);
+      })
+    );
+
+    await Promise.all(
+      uncheckedTags.map(async (postTag) => {
+        // Assuming you have a function like removePostTag
+        await removePostTag(postTag.id);
       })
     );
 
