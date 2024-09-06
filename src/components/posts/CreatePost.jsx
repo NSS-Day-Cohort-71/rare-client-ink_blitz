@@ -7,11 +7,12 @@
 // call addPost() function
 // application navigates to "Post Details View"
 
-import { useEffect, useRef, useState } from 'react';
-import { addPost } from '../../managers/PostManager.js';
-import { useNavigate } from 'react-router-dom';
-import { getAllTags } from '../../managers/TagManager.js';
-import { addPostTag } from '../../managers/PostTagManager.js';
+import { useEffect, useRef, useState } from "react";
+import { addPost } from "../../managers/PostManager.js";
+import { useNavigate } from "react-router-dom";
+import { getAllTags } from "../../managers/TagManager.js";
+import { addPostTag } from "../../managers/PostTagManager.js";
+import { getAllCategories } from "../../managers/CategoryManager.js";
 
 export const CreatePost = ({ token }) => {
   const title = useRef();
@@ -21,13 +22,21 @@ export const CreatePost = ({ token }) => {
   // const categoryId = useRef() | consider useState() for category dropdown per Chat
   const [tags, setTags] = useState([]);
   const [checkedTags, setCheckedTags] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(0);
 
   const fetchTags = async () => {
     const tagData = await getAllTags();
     setTags(tagData);
   };
 
+  const fetchCategories = async () => {
+    const categoryData = await getAllCategories();
+    setCategories(categoryData);
+  };
+
   useEffect(() => {
+    fetchCategories();
     fetchTags();
   }, []);
 
@@ -42,6 +51,10 @@ export const CreatePost = ({ token }) => {
     }
   };
 
+  const handleCategory = (e) => {
+    setSelectedCategory(parseInt(e.target.value));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,7 +63,7 @@ export const CreatePost = ({ token }) => {
       title: title.current.value,
       image_url: imageUrl.current.value,
       content: content.current.value,
-      category_id: 2,
+      category_id: selectedCategory,
     };
 
     const newPostId = await addPost(newPostObject);
@@ -107,10 +120,15 @@ export const CreatePost = ({ token }) => {
         </div>
 
         <div className="field">
-          <select>
+          <select onChange={handleCategory}>
             <option value="0" disabled>
               (Category select)
             </option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -123,7 +141,7 @@ export const CreatePost = ({ token }) => {
                   <input
                     onChange={(event) => handleTagSelect(event, tag)}
                     type="checkbox"
-                  />{' '}
+                  />{" "}
                   {tag.label}
                 </div>
               ))}
